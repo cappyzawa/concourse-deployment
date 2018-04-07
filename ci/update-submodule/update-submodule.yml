@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: concourse/buildroot
+    tag: git
+
+inputs:
+  - name: repo
+
+outputs:
+  - name: out
+
+run:
+  path: repo/ci/update-submodule/update-submodule.sh

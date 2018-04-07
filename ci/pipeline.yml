@@ -1,0 +1,30 @@
+groups: []
+resources:
+- name: original-repo
+  type: git
+  source:
+    tag_filter: v*
+    url: https://github.com/concourse/concourse-deployment
+- name: repo
+  type: git
+  source:
+    branch: master
+    url: https://github.com/cappyzawa/concourse-deployment
+- name: follow
+  type: git
+  source:
+    branch: follow
+    url: https://github.com/cappyzawa/concourse-deployment
+resource_types: []
+jobs:
+- name: follow-original
+  serial: true
+  build_logs_to_retain: 20
+  plan:
+  - aggregate:
+    - get: original-repo
+      trigger: true
+    - get: repo
+  - task: update-submodule
+    file: repo/ci/update-submodule/update-submodule.yml
+  - put: follow
