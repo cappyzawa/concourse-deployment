@@ -7,6 +7,7 @@ bosh -e vbox deploy -d concourse ../concourse-bosh-deployment/cluster/concourse.
 -o ../concourse-bosh-deployment/cluster/operations/basic-auth.yml \
 -o ../concourse-bosh-deployment/cluster/operations/static-web.yml \
 -o ../operations/default-check-interval.yml \
+-o ../operations/worker-instances.yml \
 -v deployment_name="concourse" \
 -v network_name="default" \
 -v web_vm_type="default" \
@@ -16,4 +17,5 @@ bosh -e vbox deploy -d concourse ../concourse-bosh-deployment/cluster/concourse.
 -v external_url="http://10.244.0.34:8080" \
 -v web_ip="10.244.0.34" \
 -v default_check_interval="12h" \
+-v worker_instances=3 \
 --no-redact
